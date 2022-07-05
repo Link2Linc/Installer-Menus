@@ -46,7 +46,7 @@ namespace Installer_Menus
             };
             proc.Start();
             Thread.Sleep(20000);
-            if(File.Exists(homeDir + "/Applications/VLC.app"))
+            if(Directory.Exists(homeDir + "/Applications/VLC.app"))
             {
                 Console.WriteLine("VLC already exists.");
                 Thread.Sleep(1500);
@@ -54,6 +54,7 @@ namespace Installer_Menus
                 
             } else
             {
+                Console.WriteLine("Copying VLC from mounted DMG to local applications folder...");
                 CopyDirectory("/Volumes/VLC media player/VLC.app", homeDir + "/Applications/VLC.app", true);
             }
             Console.Write("\n\n\n\n\n Successfully installed VLC. Cleaning files");

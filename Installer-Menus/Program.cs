@@ -57,7 +57,12 @@ namespace Installer_Menus
         {
             if(app == "vlc")
             {
+                Console.Clear();
                 Vlc.AppInstall();
+            } else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("The app you entered does not work, or does not exist.");
             }
         }
     }
