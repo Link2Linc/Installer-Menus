@@ -6,15 +6,15 @@ using System.Diagnostics;
 
 namespace Installer_Menus
 {
-    class Vlc
+    class Obs
     {
         public static void AppInstall()
         {
             string homeDir = Environment.GetEnvironmentVariable("HOME");
             WebClient client = new WebClient();
-            string url = "https://vlc.freemirror.org/vlc/3.0.17.3/macosx/vlc-3.0.17.3-intel64.dmg";
-            string installFile = homeDir + "/VLC.dmg";
-            Console.WriteLine("Starting VLC install.");
+            string url = "https://cdn-fastly.obsproject.com/downloads/obs-mac-27.2.4.dmg";
+            string installFile = homeDir + "/OBS.dmg";
+            Console.WriteLine("Starting OBS install.");
             Console.WriteLine("Saving file to " + installFile);
             DownloadFile.Downloadfile(url, installFile);
             url = "https://raw.githubusercontent.com/Link2Linc/Installer-Menus/master/build-scripts/unmount.sh";
@@ -38,7 +38,7 @@ namespace Installer_Menus
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 FileName = homeDir + "/mount.sh",
-                Arguments = "VLC.dmg " + homeDir,
+                Arguments = "OBS.dmg " + homeDir,
             };
             Process proc = new Process()
             {
@@ -46,20 +46,20 @@ namespace Installer_Menus
             };
             proc.Start();
             Thread.Sleep(20000);
-            if (Directory.Exists(homeDir + "/Applications/VLC.app"))
+            if (Directory.Exists(homeDir + "/Applications/OBS.app"))
             {
-                Console.WriteLine("VLC already exists.");
+                Console.WriteLine("OBS already exists.");
                 Thread.Sleep(1500);
                 Environment.Exit(0);
 
             }
             else
             {
-                Console.WriteLine("Copying VLC from mounted DMG to local applications folder...");
-                CopyDirectory("/Volumes/VLC media player/VLC.app", homeDir + "/Applications/VLC.app", true);
+                Console.WriteLine("Copying OBS from mounted DMG to local applications folder...");
+                CopyDirectory("/Volumes/OBS-Studio 27.2.4/OBS.app", homeDir + "/Applications/OBS.app", true);
             }
-            Console.Write("\n\n\n\n\n Successfully installed VLC. Cleaning files");
-            File.Delete(homeDir + "/VLC.dmg");
+            Console.Write("\n\n\n\n\n Successfully installed OBS. Cleaning files");
+            File.Delete(homeDir + "/OBS.dmg");
             url = "https://raw.githubusercontent.com/Link2Linc/Installer-Menus/master/build-scripts/unmount.sh";
             installFile = homeDir + "/unmount.sh";
             DownloadFile.Downloadfile(url, installFile);
@@ -79,7 +79,7 @@ namespace Installer_Menus
             ProcessStartInfo startInfo1 = new ProcessStartInfo()
             {
                 FileName = homeDir + "/unmount.sh",
-                Arguments = "/Volumes/VLC\\ media\\ player/ " + homeDir,
+                Arguments = "/Volumes/OBS-Studio\\ 27.2.4/ " + homeDir,
             };
             Process proc1 = new Process()
             {
@@ -90,7 +90,7 @@ namespace Installer_Menus
             File.Delete(homeDir + "/unmount.sh");
             File.Delete(homeDir + "/mount.sh");
             Console.Clear();
-            Console.Write("\n\n finished cleaning up. Enjoy VLC!");
+            Console.Write("\n\n finished cleaning up. Enjoy OBS!");
         }
         static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
         {

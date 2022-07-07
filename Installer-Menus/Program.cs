@@ -59,6 +59,10 @@ namespace Installer_Menus
             {
                 Console.Clear();
                 Vlc.AppInstall();
+            } else if(app == "obs")
+            {
+                Console.Clear();
+                Obs.AppInstall();
             } else
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
